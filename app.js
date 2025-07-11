@@ -1,6 +1,9 @@
-// jshint esversion:6 - also add to json - "type": "commonjs",
+// jshint esversion:6 
+// also add to json - "type": "commonjs",
 
 require("dotenv").config(); // must be at the top
+// console.log("MAILCHIMP API KEY:", process.env.MAILCHIMP_API_KEY);
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const request = require("request");
@@ -41,11 +44,6 @@ app.post("/", function (req, res) {
 
 var jsonData = JSON.stringify(data);
 
-// const url = "https://us18.api.mailchimp.com/3.0/lists/ad60b5f229";
-// const options = {
-//     method: "POST",
-//     auth: "segun2:980892bf5e1a67dc452db2d168ca3b1a-us18"
-// }
 
 // my route
 const url = `https://us18.api.mailchimp.com/3.0/lists/${process.env.MAILCHIMP_LIST_ID}`;
