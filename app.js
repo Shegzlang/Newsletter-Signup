@@ -1,5 +1,6 @@
 // jshint esversion:6 - also add to json - "type": "commonjs",
 
+require("dotenv").config(); // must be at the top
 const express = require("express");
 const bodyParser = require("body-parser");
 const request = require("request");
@@ -40,11 +41,19 @@ app.post("/", function (req, res) {
 
 var jsonData = JSON.stringify(data);
 
-const url = "https://us18.api.mailchimp.com/3.0/lists/ad60b5f229";
+// const url = "https://us18.api.mailchimp.com/3.0/lists/ad60b5f229";
+// const options = {
+//     method: "POST",
+//     auth: "segun2:980892bf5e1a67dc452db2d168ca3b1a-us18"
+// }
+
+// my route
+const url = `https://us18.api.mailchimp.com/3.0/lists/${process.env.MAILCHIMP_LIST_ID}`;
 const options = {
     method: "POST",
-    auth: "segun1:22c5388d07c32170dd9acde599058292-us18"
-}
+    auth: `segun2:${process.env.MAILCHIMP_API_KEY}`
+};
+
 
 const request = https.request(url, options, function(response) {
 
@@ -74,13 +83,6 @@ app.post("/failure", function(req, res) {
 app.listen(process.env.PORT || 3000, function () {
   console.log("Server is running on port 3000");
 });
-
-
-// API KEY
-// 22c5388d07c32170dd9acde599058292-us18
-
-//  list ID
-// ad60b5f229
 
 
 
