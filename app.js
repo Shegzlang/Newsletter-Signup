@@ -6,7 +6,6 @@ require("dotenv").config(); // must be at the top
 
 const express = require("express");
 const bodyParser = require("body-parser");
-const request = require("request");
 const https = require("https")
 
 
@@ -17,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 
-// for the form
+// for the form and to serve signup page
 app.get("/", function (req, res) {
     res.sendFile(__dirname + "/signup.html");   
 });
@@ -52,7 +51,6 @@ const options = {
     auth: `segun2:${process.env.MAILCHIMP_API_KEY}`
 };
 
-
 const request = https.request(url, options, function(response) {
 
     if (response.statusCode === 200) {
@@ -65,7 +63,6 @@ const request = https.request(url, options, function(response) {
         console.log(JSON.parse(data));
     });
 });
-
 
 request.write(jsonData);
 request.end();
